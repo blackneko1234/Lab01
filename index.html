@@ -19,7 +19,14 @@
                     <img :src="image">
                 </div>
                 <div class="product-info">
-                    <a :href="link" target="blank">{{product}}</h1>
+                    <a :href="link" target="blank">{{product}}</a>
+                    <p v-if="inventory > 10">In Stock</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">In Stock</p>
+                    <p v-else>Out of Stock</p>
+
+                    <p v-if="onSale">Sale</p>
+                    <p v-else>Not Sale</p>
+                    <p></p>
                 </div>
             </div>
         </div>
