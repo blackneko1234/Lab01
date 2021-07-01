@@ -19,14 +19,32 @@
                     <img :src="image">
                 </div>
                 <div class="product-info">
-                    <a :href="link" target="blank">{{product}}</a>
+                    <h1><a :href="link" target="blank">{{product}}</a></h1>
+
+                    <h3>Product Status</h3>
                     <p v-if="inventory > 10">In Stock</p>
                     <p v-else-if="inventory <= 10 && inventory > 0">In Stock</p>
                     <p v-else>Out of Stock</p>
 
                     <p v-if="onSale">Sale</p>
                     <p v-else>Not Sale</p>
-                    <p></p>
+
+                    <h3>Material</h3>
+                    <ul>
+                        <li v-for='detail in details'>{{detail}}</li>
+                    </ul>
+
+                    <h3>Variant</h3>
+                    <ul>
+                        <li v-for="variant in variants" :key="variant.id">{{variant.color}}</li>
+                    </ul>
+
+                    <h3>Size</h3>
+                    <ul>
+                        <span v-for="size in sizes" :key="size.id">{{size.Text}} </span>
+                    </ul>
+
+                    
                 </div>
             </div>
         </div>
