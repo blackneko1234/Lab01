@@ -13,6 +13,7 @@
 <body>
     <div id="app">
         <div class="nav-bar"></div>
+        <div class="cart" style="width: 5%;">Cart({{cart}})</div>
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
@@ -21,34 +22,40 @@
                 <div class="product-info">
                     <h1><a :href="link" target="blank">{{product}}</a></h1>
 
-                    <h3>Product Status</h3>
-                    <p v-if="inventory > 10">In Stock</p>
-                    <p v-else-if="inventory <= 10 && inventory > 0">In Stock</p>
-                    <p v-else>Out of Stock</p>
+                    <li><b>Description:</b> {{description}}</li>
 
-                    <p v-if="onSale">Sale</p>
-                    <p v-else>Not Sale</p>
+                    <h3>Product Status</h3>
+                    <ul>
+                        <li><b>Inventory:</b> {{inventory}}</li>
+                        <li style="color:green" v-if="inventory > 10">In Stock</li>
+                        <li style="color:green" v-else-if="inventory <= 10 && inventory > 0">In Stock</li>
+                        <li style="color:red" v-else>Out of Stock</li>
+                        <li style="color:green" v-if="onSale">On Sale now!!!</li>
+                        <li style="color:red" v-else>Not Sale!!!</li>
+                    </ul>
 
                     <h3>Material</h3>
                     <ul>
                         <li v-for='detail in details'>{{detail}}</li>
                     </ul>
 
-                    <h3>Variant</h3>
+                    <h3>Color</h3>
                     <ul>
-                        <li v-for="variant in variants" :key="variant.id">{{variant.color}}</li>
+                        <li v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)"
+                            style="cursor: pointer;">
+                            {{variant.color}}
+                        </li>
                     </ul>
 
                     <h3>Size</h3>
                     <ul>
-                        <span v-for="size in sizes" :key="size.id">{{size.Text}} </span>
+                        <span v-for="variant in variants" :key="variant.id">{{variant.Text}} </span>
                     </ul>
-
-                    
+                    <button class="button" @click="addToCart">+ Add to Cart</button>
+                    <button class="button" @click="removeFromCart" style="width: auto;">- Remove from cart</button>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Import Js -->
